@@ -12,6 +12,7 @@ class Model {
 
   	$email=$_REQUEST['email'];
   	$password=$_REQUEST['password'];
+    $id=$_GET['id'];
   
      $conn= Db::getInstance();
 
@@ -28,8 +29,9 @@ $stmt2 = $conn->prepare("SELECT fname,lname FROM accounts WHERE ? = email AND ? 
      $params2 = array($email,$password);
      $stmt2->execute($params2);
 
-$stmt3 = $conn->prepare("SELECT * FROM todos");
-     $stmt3->execute();
+$stmt3 = $conn->prepare("SELECT * FROM todos WHERE ? = owneremail");
+     $params3 = array($email);
+     $stmt3->execute($params3);
 
 
 
